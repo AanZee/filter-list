@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery.filter-list.js demo</title>
+	<style>
+		.is-hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Basic example</h1>
+	<p>Search is done on a keyup event</p>
+	<div>
+		<input class="basic-search" type="text" data-filter-list="#fruit-list-1">
+		<ul id="fruit-list-1">
+			<li>Apple</li>
+			<li>Apricot</li>
+			<li>Avocado</li>
+			<li>Banana</li>
+			<li>Breadfruit</li>
+			<li>Bilberry</li>
+			<li>Blackberry</li>
+			<li>Blackcurrant</li>
+			<li>Blueberry</li>
+			<li>Boysenberry</li>
+			<li>Cantaloupe</li>
+			<li>Currant</li>
+			<li>Cherry</li>
+			<li>Cherimoya</li>
+			<li>Cloudberry</li>
+			<li>Coconut</li>
+			<li>Cranberry</li>
+			<li>Cucumber</li>
+			<li>Damson</li>
+			<li>Date</li>
+			<li>Dragonfruit</li>
+		</ul>
+	</div>
+
+	<hr/>
+
+	<h1>Baic example (on enter)</h1>
+	<p>Search is done on a enter event (or any buttons which call</p>
+	<div>
+		<input class="basic-search-on-enter" type="text" data-filter-list="#fruit-list-2"> <button class="trigger-search">Trigger search</button>
+		<ul id="fruit-list-2">
+			<li>Apple</li>
+			<li>Apricot</li>
+			<li>Avocado</li>
+			<li>Banana</li>
+			<li>Breadfruit</li>
+			<li>Bilberry</li>
+			<li>Blackberry</li>
+			<li>Blackcurrant</li>
+			<li>Blueberry</li>
+			<li>Boysenberry</li>
+			<li>Cantaloupe</li>
+			<li>Currant</li>
+			<li>Cherry</li>
+			<li>Cherimoya</li>
+			<li>Cloudberry</li>
+			<li>Coconut</li>
+			<li>Cranberry</li>
+			<li>Cucumber</li>
+			<li>Damson</li>
+			<li>Date</li>
+			<li>Dragonfruit</li>
+		</ul>
+	</div>
+
+	<h1>Use class names</h1>
+	<p>This style is set in the head <code>.is-hidden { display: none; }</code></p>
+	<div>
+		<input class="use-class-names" type="text" data-filter-list="#fruit-list-3">
+		<ul id="fruit-list-3">
+			<li>Apple</li>
+			<li>Apricot</li>
+			<li>Avocado</li>
+			<li>Banana</li>
+			<li>Breadfruit</li>
+			<li>Bilberry</li>
+			<li>Blackberry</li>
+			<li>Blackcurrant</li>
+			<li>Blueberry</li>
+			<li>Boysenberry</li>
+			<li>Cantaloupe</li>
+			<li>Currant</li>
+			<li>Cherry</li>
+			<li>Cherimoya</li>
+			<li>Cloudberry</li>
+			<li>Coconut</li>
+			<li>Cranberry</li>
+			<li>Cucumber</li>
+			<li>Damson</li>
+			<li>Date</li>
+			<li>Dragonfruit</li>
+		</ul>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="jquery.filter-list.js"></script>
+	<script>
+		$(function () {
+			// Document ready
+			$('.basic-search').filterList();
+
+			$('.basic-search-on-enter').filterList({
+				isFilteredOnKeyup: false
+			});
+
+			$('.trigger-enter').on('click', function (e) {
+				e.preventDefault();
+				$(this).parent().find('input').trigger('search');
+			});
+
+			$('.use-class-names').filterList({
+				isToggledWithClassNames: true
+			});
+		});
+	</script>
+</body>
+</html>
