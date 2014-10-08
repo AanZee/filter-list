@@ -1,5 +1,5 @@
 # jquery.filter-list.js
-> Filter a list with an input field, without the hassle [Check it out on JSFiddle](TODO)
+> Filter a list with an input field, without the hassle [Check it out on JSFiddle](http://jsfiddle.net/jeroen_ransijn/z1h3w8cm/3/)
 
 ## Features
 -
