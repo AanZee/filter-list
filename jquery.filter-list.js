@@ -34,7 +34,7 @@
 		this._defaults = defaults;
 		this._name = pluginName;
 
-		this.init();
+		return this.init();
 	}
 
 	Plugin.prototype = {
@@ -42,12 +42,15 @@
 		init: function () {
 			var listSelector = this.$el.attr( this.options['filterListAttribute'] );
 			this.$list = $(listSelector);
+			this.$items = this.$list.find( this.options['selectorItem'] );
 
 			if (this.$list.length > 0) {
 				this.$el
 					.on('keyup', this._onKeyup.bind(this))
 					.on('search', this.search.bind(this));
 			}
+
+			return this;
 		},
 		reset: function () {
 			if ( this.options['isToggledWithClassNames'] ) {
@@ -58,13 +61,14 @@
 			}
 
 			this.$el.trigger('reset');
+
+			return this;
 		},
 		_onKeyup: function (e) {
-			var searchValue = this.$el.val();
-
-			if ( ! (e && e.which == 13 || this.options['isFilteredOnKeyup']) ) return;
-
-			this.search();
+			if ((e && e.which == 13 || this.options['isFilteredOnKeyup']) ) {
+				this.search();
+			}
+			return this;
 		},
 		search: function () {
 			var searchValue = this.$el.val();
@@ -73,8 +77,8 @@
 				return this.reset();
 			}
 
-			var nonMatches = this.$list.find( this.options['selectorItem'] + ':not(:Contains(' + searchValue + '))');
-			var matches = this.$list.not( nonMatches );
+			var matches = this.$items.filter(':Contains(' + searchValue + ')');
+			var nonMatches = this.$items.not( matches );
 
 			// Hide non matches
 			if ( this.options['isToggledWithClassNames'] ) {
@@ -94,7 +98,9 @@
 				matches.show();
 			}
 
-			this.$el.trigger('filter', [searchValue || "", matches, nonMatches]);
+			this.$el.trigger('filter', [searchValue || "", matches, nonMatches, this]);
+
+			return this;
 		},
 		getList: function () {
 			return this.$list;

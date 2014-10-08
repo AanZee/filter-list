@@ -64,6 +64,21 @@ $('.trigger-search').on('click', function (e) {
 ## Toggle with class names instead of show/hide
 By default does the filter call the `show`/`hide` methods on the jQuery elements. Sometimes this is not desired, so you can set it to use class names: which uses `is-hidden` and `is-shown` by default. (Most implementations will not require the `is-shown` class)
 
+
+## Listening to filter events
+It is easy to build your application around filter list because it's easy to see what matches are returned.
+
+```javascript
+/**
+ * @param {string} searchValue
+ * @param {array} matches, contains jQuery elements
+ * @param {array} nonMatches, contains jQuery elements
+ * @param {array} plugin, reference to the plugin
+ */
+$('#filter-list-listening').filterList()
+	.on('filter', function (searchValue, matches, nonMatches, plugin) {
+		// do stuff...
+	});
 ```
 
 ## Options and defaults
